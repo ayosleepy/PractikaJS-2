@@ -55,6 +55,9 @@
                             </li>
                         </ul>
                         <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
+                        <div v-if="card.completedAt" class="timestamp">
+                            {{ card.completedAt }}
+                        </div>
                     </div>
                 </div>
             </div>
