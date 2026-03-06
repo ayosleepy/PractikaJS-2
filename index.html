@@ -4,63 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
-    <script defer src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script defer src="js/vue.js"></script>
     <script defer src="js/main.js"></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <div id="app">
-        <h1>Notes App</h1>
-        <div class="columns">
-
-            <div class="column" :class="{ blocked: isColumn1Blocked }">
-                <h2>To Do</h2>
-                <div class="cards">
-                    <div v-for="card in column1" :key="card.id" class="card">
-                        <h3>{{ card.title }}</h3>
-                        <ul>
-                            <li v-for="item in card.items">
-                                <input type="checkbox" :checked="item.done" @change="toggleItem(card, item)"> {{ item.text }}
-                            </li>
-                        </ul>
-                        <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
-                    </div>
-                </div>
-                <button @click="addNewCard" :disabled="column1.length >= 3">Add card</button>
-            </div>
-            
-            <div class="column">
-                <h2>In Progress</h2>
-                <div class="cards">
-                    <div v-for="card in column2" :key="card.id" class="card">
-                        <h3>{{ card.title }}</h3>
-                        <ul>
-                            <li v-for="item in card.items">
-                                <input type="checkbox" :checked="item.done" @change="toggleItem(card, item)"> {{ item.text }}
-                            </li>
-                        </ul>
-                        <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="column">
-                <h2>Done</h2>
-                <div class="cards">
-                    <div v-for="card in column3" :key="card.id" class="card">
-                        <h3>{{ card.title }}</h3>
-                        <ul>
-                            <li v-for="item in card.items">
-                                <input type="checkbox" :checked="item.done" @change="toggleItem(card, item)"> {{ item.text }}
-                            </li>
-                        </ul>
-                        <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
-                        <div v-if="card.completedAt" class="timestamp">
-                            {{ card.completedAt }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <h1>Notes App</h1>
+    <div class="columns">
+        <note-column 
+            title="To Do"
+            :cards="column1"
+            column-type="todo"
+            @add-card="addNewCard"
+            @toggle-item="toggleItem">
+        </note-column>
+        
+        <note-column 
+            title="In Progress"
+            :cards="column2"
+            column-type="progress"
+            @toggle-item="toggleItem">
+        </note-column>
+        
+        <note-column 
+            title="Done"
+            :cards="column3"
+            column-type="done"
+            @toggle-item="toggleItem">
+        </note-column>
+    </div>
+    </div>
 </body>
 </html>
