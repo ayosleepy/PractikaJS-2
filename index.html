@@ -14,18 +14,46 @@
         <div class="columns">
             <div class="column">
                 <h2>To Do</h2>
-                <div class="cards"></div>
-                <button>Add card</button>
+                <div class="cards">
+                    <div v-for="card in column1" :key="card.id" class="card">
+                        <h3>{{ card.title }}</h3>
+                        <ul>
+                            <li v-for="item in card.items">
+                                {{ item.text }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <button @click="addNewCard">Add card</button>
             </div>
+            
             <div class="column">
                 <h2>In Progress</h2>
-                <div class="cards"></div>
+                <div class="cards">
+                    <div v-for="card in column2" :key="card.id" class="card">
+                        <h3>{{ card.title }}</h3>
+                        <ul>
+                            <li v-for="item in card.items">
+                                {{ item.text }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+            
             <div class="column">
                 <h2>Done</h2>
-                <div class="cards"></div>
+                <div class="cards">
+                    <div v-for="card in column3" :key="card.id" class="card">
+                        <h3>{{ card.title }}</h3>
+                        <ul>
+                            <li v-for="item in card.items">
+                                {{ item.text }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 </body>
 </html>
