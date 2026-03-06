@@ -19,7 +19,7 @@
                         <h3>{{ card.title }}</h3>
                         <ul>
                             <li v-for="item in card.items">
-                                {{ item.text }}
+                                <input type="checkbox" v-model="item.done"> {{ item.text }}
                             </li>
                         </ul>
                     </div>
@@ -34,7 +34,7 @@
                         <h3>{{ card.title }}</h3>
                         <ul>
                             <li v-for="item in card.items">
-                                {{ item.text }}
+                                <input type="checkbox" v-model="item.done"> {{ item.text }}
                             </li>
                         </ul>
                     </div>
@@ -48,7 +48,7 @@
                         <h3>{{ card.title }}</h3>
                         <ul>
                             <li v-for="item in card.items">
-                                {{ item.text }}
+                                <input type="checkbox" v-model="item.done"> {{ item.text }}
                             </li>
                         </ul>
                     </div>
