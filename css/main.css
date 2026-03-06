@@ -76,3 +76,8 @@ button:disabled {
     background: #d8d8d8;
     cursor: not-allowed;
 }
+
+.blocked {
+    opacity: 0.5;
+    pointer-events: none;
+}

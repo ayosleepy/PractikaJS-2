@@ -13,7 +13,7 @@
         <h1>Notes App</h1>
         <div class="columns">
 
-            <div class="column">
+            <div class="column" :class="{ blocked: isColumn1Blocked }">
                 <h2>To Do</h2>
                 <div class="cards">
                     <div v-for="card in column1" :key="card.id" class="card">

@@ -3,7 +3,8 @@ let app = new Vue({
     data: {
         column1: [],
         column2: [],
-        column3: []
+        column3: [],
+        isColumn1Blocked: false
     },
     methods: {
     addNewCard() {
@@ -47,10 +48,19 @@ let app = new Vue({
                 this.column2.splice(i, 1)
             }
         }
+        this.checkColumn1Blocked()
     },
     toggleItem(card, item) {
         item.done = !item.done
         this.checkAndMoveCards()
-    }
+        this.checkColumn1Blocked()
+    },
+    checkColumn1Blocked() {
+        if (this.column2.length >= 5) {
+            this.isColumn1Blocked = true
+        } else {
+            this.isColumn1Blocked = false
+        }
+    },
 },
 })
