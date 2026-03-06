@@ -6,6 +6,7 @@ let app = new Vue({
         column3: [],
         isColumn1Blocked: false
     },
+
     methods: {
     addNewCard() {
         let newCard = {
@@ -62,5 +63,48 @@ let app = new Vue({
             this.isColumn1Blocked = false
         }
     },
-},
+    },
+
+    watch: {
+    column1: {
+        handler() {
+            localStorage.setItem('notes', JSON.stringify({
+                column1: this.column1,
+                column2: this.column2,
+                column3: this.column3
+            }))
+        },
+        deep: true
+    },
+    column2: {
+        handler() {
+            localStorage.setItem('notes', JSON.stringify({
+                column1: this.column1,
+                column2: this.column2,
+                column3: this.column3
+            }))
+        },
+        deep: true
+    },
+    column3: {
+        handler() {
+            localStorage.setItem('notes', JSON.stringify({
+                column1: this.column1,
+                column2: this.column2,
+                column3: this.column3
+            }))
+        },
+        deep: true
+    }
+    },
+
+    mounted() {
+    let saved = localStorage.getItem('notes')
+    if (saved) {
+        let data = JSON.parse(saved)
+        this.column1 = data.column1 || []
+        this.column2 = data.column2 || []
+        this.column3 = data.column3 || []
+    }
+    },
 })
