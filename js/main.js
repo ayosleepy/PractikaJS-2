@@ -17,6 +17,11 @@ let app = new Vue({
             ]
         }
         this.column1.push(newCard)
+    },
+    getCompletionPercent(items) {
+        if (items.length === 0) return 0
+        let doneCount = items.filter(item => item.done).length
+        return (doneCount / items.length) * 100
     }
 },
 })

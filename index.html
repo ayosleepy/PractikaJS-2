@@ -12,6 +12,7 @@
     <div id="app">
         <h1>Notes App</h1>
         <div class="columns">
+
             <div class="column">
                 <h2>To Do</h2>
                 <div class="cards">
@@ -22,6 +23,7 @@
                                 <input type="checkbox" v-model="item.done"> {{ item.text }}
                             </li>
                         </ul>
+                        <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
                     </div>
                 </div>
                 <button @click="addNewCard">Add card</button>
@@ -37,6 +39,7 @@
                                 <input type="checkbox" v-model="item.done"> {{ item.text }}
                             </li>
                         </ul>
+                        <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
                     </div>
                 </div>
             </div>
@@ -51,6 +54,7 @@
                                 <input type="checkbox" v-model="item.done"> {{ item.text }}
                             </li>
                         </ul>
+                        <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
                     </div>
                 </div>
             </div>
