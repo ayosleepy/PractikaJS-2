@@ -1,3 +1,73 @@
+Vue.component('note-card', {
+    props: ['card'],
+    template: `
+        <div class="card">
+            <h3>{{ card.title }}</h3>
+            <ul>
+                <li v-for="item in card.items">
+                    <input type="checkbox" 
+                           :checked="item.done" 
+                           @change="$emit('toggle-item', card, item)"> 
+                    {{ item.text }}
+                </li>
+            </ul>
+            <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
+            <div v-if="card.completedAt" class="timestamp">
+                {{ card.completedAt }}
+            </div>
+        </div>
+    `,
+    methods: {
+        getCompletionPercent(items) {
+            if (items.length === 0) return 0
+            let doneCount = items.filter(item => item.done).length
+            return (doneCount / items.length) * 100
+        }
+    }
+})
+
+Vue.component('note-column', {
+    props: {
+        title: String,
+        cards: Array,
+        columnType: String
+    },
+    template: `
+        <div class="column" :class="{ blocked: isBlocked }">
+            <h2>{{ title }} ({{ cards.length }}/{{ maxCards }})</h2>
+            <div class="cards">
+                <note-card 
+                    v-for="card in cards" 
+                    :key="card.id" 
+                    :card="card"
+                    @toggle-item="handleToggleItem">
+                </note-card>
+            </div>
+            <button 
+                v-if="columnType === 'todo'" 
+                @click="$emit('add-card')"
+                :disabled="cards.length >= maxCards">
+                Add card
+            </button>
+        </div>
+    `,
+    computed: {
+        maxCards() {
+            if (this.columnType === 'todo') return 3
+            if (this.columnType === 'progress') return 5
+            return Infinity
+        },
+        isBlocked() {
+            return this.columnType === 'todo' && this.$parent.isColumn1Blocked
+        }
+    },
+    methods: {
+        handleToggleItem(card, item) {
+            this.$emit('toggle-item', card, item)
+        }
+    }
+})
+
 let app = new Vue({
     el: '#app',
     data: {
