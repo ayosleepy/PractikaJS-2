@@ -71,3 +71,8 @@ input[type="checkbox"] {
     margin-top: 8px;
     text-align: right;
 }
+
+button:disabled {
+    background: #d8d8d8;
+    cursor: not-allowed;
+}

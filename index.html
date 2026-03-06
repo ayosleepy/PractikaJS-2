@@ -26,7 +26,7 @@
                         <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
                     </div>
                 </div>
-                <button @click="addNewCard">Add card</button>
+                <button @click="addNewCard" :disabled="column1.length >= 3">Add card</button>
             </div>
             
             <div class="column">
