@@ -20,7 +20,7 @@
                         <h3>{{ card.title }}</h3>
                         <ul>
                             <li v-for="item in card.items">
-                                <input type="checkbox" v-model="item.done"> {{ item.text }}
+                                <input type="checkbox" :checked="item.done" @change="toggleItem(card, item)"> {{ item.text }}
                             </li>
                         </ul>
                         <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
@@ -36,7 +36,7 @@
                         <h3>{{ card.title }}</h3>
                         <ul>
                             <li v-for="item in card.items">
-                                <input type="checkbox" v-model="item.done"> {{ item.text }}
+                                <input type="checkbox" :checked="item.done" @change="toggleItem(card, item)"> {{ item.text }}
                             </li>
                         </ul>
                         <div>Progress: {{ getCompletionPercent(card.items) }}%</div>
@@ -51,7 +51,7 @@
                         <h3>{{ card.title }}</h3>
                         <ul>
                             <li v-for="item in card.items">
-                                <input type="checkbox" v-model="item.done"> {{ item.text }}
+                                <input type="checkbox" :checked="item.done" @change="toggleItem(card, item)"> {{ item.text }}
                             </li>
                         </ul>
                         <div>Progress: {{ getCompletionPercent(card.items) }}%</div>

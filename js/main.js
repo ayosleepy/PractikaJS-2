@@ -22,6 +22,35 @@ let app = new Vue({
         if (items.length === 0) return 0
         let doneCount = items.filter(item => item.done).length
         return (doneCount / items.length) * 100
+    },
+    checkAndMoveCards() {
+        for (let i = this.column1.length - 1; i >= 0; i--) {
+            let card = this.column1[i]
+            let percent = this.getCompletionPercent(card.items)
+
+            if (percent >= 100) {
+                card.completedAt = new Date().toLocaleString()
+                this.column3.push(card)
+                this.column1.splice(i, 1)
+            } else if (percent > 50) {
+                this.column2.push(card)
+                this.column1.splice(i, 1)
+            }
+        }
+        for (let i = this.column2.length - 1; i >= 0; i--) {
+            let card = this.column2[i]
+            let percent = this.getCompletionPercent(card.items)
+
+            if (percent >= 100) {
+                card.completedAt = new Date().toLocaleString()
+                this.column3.push(card)
+                this.column2.splice(i, 1)
+            }
+        }
+    },
+    toggleItem(card, item) {
+        item.done = !item.done
+        this.checkAndMoveCards()
     }
 },
 })
