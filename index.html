@@ -17,21 +17,24 @@
             :cards="column1"
             column-type="todo"
             @add-card="addNewCard"
-            @toggle-item="toggleItem">
+            @toggle-item="toggleItem"
+            @change-color="changeCardColor">
         </note-column>
         
         <note-column 
             title="In Progress"
             :cards="column2"
             column-type="progress"
-            @toggle-item="toggleItem">
+            @toggle-item="toggleItem"
+            @change-color="changeCardColor">
         </note-column>
         
         <note-column 
             title="Done"
             :cards="column3"
             column-type="done"
-            @toggle-item="toggleItem">
+            @toggle-item="toggleItem"
+            @change-color="changeCardColor">
         </note-column>
     </div>
     </div>

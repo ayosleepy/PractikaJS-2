@@ -1,8 +1,11 @@
 Vue.component('note-card', {
     props: ['card'],
     template: `
-        <div class="card">
+        <div class="card" :style="{ backgroundColor: card.color }">
+            <div style="display: flex; justify-content: space-between;">
             <h3>{{ card.title }}</h3>
+            <button @click="$emit('change-color', card)">C</button>
+            </div>
             <ul>
                 <li v-for="item in card.items">
                     <input type="checkbox" 
@@ -40,7 +43,8 @@ Vue.component('note-column', {
                     v-for="card in cards" 
                     :key="card.id" 
                     :card="card"
-                    @toggle-item="handleToggleItem">
+                    @toggle-item="handleToggleItem"
+                    @change-color="$emit('change-color', card)">
                 </note-card>
             </div>
             <button 
@@ -81,6 +85,7 @@ let app = new Vue({
             let newCard = {
                 id: Date.now(),
                 title: 'New note',
+                color: '#ffffff',
                 items: [
                     { text: 'Task 1', done: false },
                     { text: 'Task 2', done: false },
@@ -133,6 +138,14 @@ let app = new Vue({
             if (items.length === 0) return 0
             let doneCount = items.filter(item => item.done).length
             return (doneCount / items.length) * 100
+        },
+
+        changeCardColor(card) {
+            if (card.color === '#ffffff') {
+                card.color = '#ffcccc'
+            } else {
+                card.color = '#ffffff'
+            }
         }
     },
     watch: {
