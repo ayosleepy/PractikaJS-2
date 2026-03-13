@@ -57,7 +57,10 @@ Vue.component('add-note-form', {
 })
 
 Vue.component('note-card', {
-    props: ['card'],
+    props: {
+        card: Object,
+        isColumn1Blocked: Boolean
+    },
     template: `
         <div class="card">
             <div style="display: flex; justify-content: space-between;">
@@ -67,7 +70,8 @@ Vue.component('note-card', {
                 <li v-for="item in card.items">
                     <input type="checkbox" 
                            :checked="item.done" 
-                           @change="$emit('toggle-item', card, item)"> 
+                           @change="$emit('toggle-item', card, item)"
+                           :disabled="isColumn1Blocked"> 
                     {{ item.text }}
                 </li>
             </ul>
@@ -100,15 +104,10 @@ Vue.component('note-column', {
                     v-for="card in cards" 
                     :key="card.id" 
                     :card="card"
+                    :is-column1-blocked="columnType === 'todo' && $parent.isColumn1Blocked"
                     @toggle-item="handleToggleItem">
                 </note-card>
             </div>
-            <button 
-                v-if="columnType === 'todo'" 
-                @click="$emit('add-card')"
-                :disabled="cards.length >= maxCards">
-                Add card
-            </button>
         </div>
     `,
     computed: {
@@ -195,7 +194,15 @@ let app = new Vue({
             return (doneCount / items.length) * 100
         },
 
-        addNoteFromForm(newcard) {
+        addNoteFromForm(newCard) {
+            if (this.column1.length >= 3) {
+                alert('Maximum 3 cards in first column')
+                return
+            }
+            if (this.isColumn1Blocked) {
+                alert('First column is blocked')
+                return
+            }
             this.column1.push(newCard)
         }
     },

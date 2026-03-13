@@ -81,3 +81,44 @@ button:disabled {
     opacity: 0.5;
     pointer-events: none;
 }
+
+.add-form {
+    background: white;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #d8d8d8;
+}
+
+.add-form h3 {
+    margin: 0 0 15px 0;
+}
+
+.add-form p {
+    margin: 10px 0;
+}
+
+.add-form label {
+    display: inline-block;
+    width: 80px;
+    font-weight: bold;
+}
+
+.add-form input {
+    padding: 8px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.add-form button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #1E95EA;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add-form button:hover {
+    background: #16C0B0;
+}
