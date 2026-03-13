@@ -136,19 +136,6 @@ let app = new Vue({
         isColumn1Blocked: false
     },
     methods: {
-        addNewCard() {
-            let newCard = {
-                id: Date.now(),
-                title: 'New note',
-                items: [
-                    { text: 'Task 1', done: false },
-                    { text: 'Task 2', done: false },
-                    { text: 'Task 3', done: false }
-                ],
-                completedAt: null
-            }
-            this.column1.push(newCard)
-        },
         
         checkAndMoveCards() {
             for (let i = this.column1.length - 1; i >= 0; i--) {
