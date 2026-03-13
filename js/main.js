@@ -1,3 +1,61 @@
+Vue.component('add-note-form', {
+    data() {
+        return {
+            title: '',
+            items: ['', '', '']
+        }
+    },
+    template: `
+        <div class="add-form">
+            <h3>New Note</h3>
+            <p>
+                <label>Title:</label>
+                <input v-model="title" placeholder="Enter title">
+            </p>
+            <p>
+                <label>Item 1:</label>
+                <input v-model="items[0]" placeholder="Enter item">
+            </p>
+            <p>
+                <label>Item 2:</label>
+                <input v-model="items[1]" placeholder="Enter item">
+            </p>
+            <p>
+                <label>Item 3:</label>
+                <input v-model="items[2]" placeholder="Enter item">
+            </p>
+            <button @click="addNote">Add Note</button>
+        </div>
+    `,
+    methods: {
+        addNote() {
+            if (!this.title) {
+                alert('Please enter a title')
+                return
+            }
+            
+            let validItems = this.items.filter(item => item.trim() !== '')
+            if (validItems.length === 0) {
+                alert('Please enter at least one item')
+                return
+            }
+            
+            let newCard = {
+                id: Date.now(),
+                title: this.title,
+                color: '#ffffff',
+                items: validItems.map(text => ({ text: text, done: false })),
+                completedAt: null
+            }
+            
+            this.$emit('add-card', newCard)
+            
+            this.title = ''
+            this.items = ['', '', '']
+        }
+    }
+})
+
 Vue.component('note-card', {
     props: ['card'],
     template: `
@@ -136,6 +194,10 @@ let app = new Vue({
             let doneCount = items.filter(item => item.done).length
             return (doneCount / items.length) * 100
         },
+
+        addNoteFromForm(newcard) {
+            this.column1.push(newCard)
+        }
     },
     watch: {
         column1: {
