@@ -2,7 +2,7 @@ Vue.component('add-note-form', {
     data() {
         return {
             title: '',
-            items: ['', '', '']
+            items: ['', '', '', '', '']
         }
     },
     template: `
@@ -24,6 +24,14 @@ Vue.component('add-note-form', {
                 <label>Item 3:</label>
                 <input v-model="items[2]" placeholder="Enter item">
             </p>
+            <p>
+                <label>Item 4:</label>
+                <input v-model="items[3]" placeholder="Enter item">
+            </p>
+            <p>
+                <label>Item 5:</label>
+                <input v-model="items[4]" placeholder="Enter item">
+            </p>
             <button @click="addNote">Add Note</button>
         </div>
     `,
@@ -35,8 +43,8 @@ Vue.component('add-note-form', {
             }
             
             let validItems = this.items.filter(item => item.trim() !== '')
-            if (validItems.length === 0) {
-                alert('Please enter at least one item')
+            if (validItems.length < 3) {
+                alert('Please enter at least 3 items')
                 return
             }
             
@@ -51,7 +59,7 @@ Vue.component('add-note-form', {
             this.$emit('add-card', newCard)
             
             this.title = ''
-            this.items = ['', '', '']
+            this.items = ['', '', '', '', '']
         }
     }
 })
